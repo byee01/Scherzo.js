@@ -40,12 +40,11 @@
 			defaultTitle: document.title,
 			pageTitles: [
 				'My poop is green.',
-				'boiling water 101',
 				'cheap hookers near pittsburgh, pa',
 				'boobs',
 				'justin beiber sexy pics',
-				'how do i shot web',
-				'Has anyone really been far even as decided to use even go want to do look more like?'
+				'how do i shot web'
+
 			]
 
 
