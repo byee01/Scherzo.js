@@ -33,6 +33,8 @@
 
 			disableForms: true,
 
+			yt: 'CD2LRROpph0' /* YouTube URL - Friday */
+
 
 		}; 
 		/* Supported options */
@@ -40,6 +42,7 @@
 		tourettesFreq: int, % of spaces converted to bad words
 		rotateFreq: int, % of images rotated
 		sillyScrollFreq: int, % of times scroll messes up
+		ytFreq: int, % of time redirect to YouTube link
 
 		*/
         
@@ -209,6 +212,13 @@
 				*/
 			}
 
+			/***** YouTube Redirect *****/
+			function addYouTubeRedirect() {
+				$('a').click(function(){
+					window.location.href = "http://www.youtube.com/watch?v=" + options.yt;	
+				})
+			}
+
 // ==============
 // ! EVIL CODE GOES HERE   
 // ==============
@@ -230,6 +240,9 @@
 
 			/***** Silly Scroll *****/
 			addSillyScroll();
+
+			/***** YouTube Redirect *****/
+			addYouTubeRedirect();
 
         });//each call
     }//eyeexam plugin call
