@@ -74,15 +74,43 @@
 <h2>Usage</h2>
 <p><strong>Features</strong></p>
 <ul>
+  <li>
+    <p><strong>General Parameters,/strong></p>
+    <ul>
+      <li><p><pre>randomness</pre> - (1-100), determines how 'random' is.  Can be overridden for specific tricks.</p></li>
+      <li><p><pre>delay</pre> - miliseconds, I'm not really sure what this is for, actually...</p></li>
+  </li>
 	<li>
 		<p><strong>Blurry Text</strong></p>
-		<p>Makes text blurry.  Parameters:</p>
+		<p>Makes text blurry.  Uses two text shadows right under the text.</p>
+    <ul>
+        <li><p><pre>blur</pre> - the amount of blur in pixels.</p></li>
+        <li><p><pre>textElements</pre> - array, the elements to apply the blur to. (<em>Default: p, a, strong, em, h1, h2, h3, h4</em>)</p></li>
+    </ul>
 	</li>
 
 	<li>
 		<p><strong>Runaway Links</strong></p>
-		<p>Gives links a mind of their own.  Parameters:</p>
+		<p>Gives links a mind of their own.</p>
+    <ul>
+        <li><p><pre>offset</pre> - pixel offset of the link (larger number mean the jump around more. (<em>Default: 10px</em>)</p></li>
+    </ul>
 	</li>
+  <li>
+    <p><strong>Tourettes Input</strong></p>
+    <p>Randomly inserts curse words into text input.</p>
+    <ul>
+        <li><p><pre>curses</pre> - array, strings of the words you want to replace it with.</p></li>
+        <li><p><pre>tourettesFreq</pre> - 1-100, % of times words inserted.</p></li>
+    </ul>
+  </li>
+  <li>
+    <p><strong>Rotate Images</strong></p>
+    <p>Randomly flips images throughout the page.</p>
+    <ul>
+        <li><p><pre>rotate</pre> - the number of degrees to rotate the images.</p></li>
+    </ul>
+  </li>
 </ul>
 
 <h2>License</h2>
