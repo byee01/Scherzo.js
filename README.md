@@ -1,4 +1,6 @@
-EyeExam.js
+# Scherzo.js
+
+Scherzo means trick in Italian, I think.
 
 A jQuery plugin designed to confuse the hell out of people.  Very evil.  
 
