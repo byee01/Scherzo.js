@@ -28,7 +28,11 @@
 			offset: 10,
 
 			curses: ['poop', 'penis', 'lol'],
-			tourettesFreq: 20 /* Overrides randomness with Tourettes */
+			tourettesFreq: 20, /* Overrides randomness with Tourettes */
+
+			rotate: 180, /* How much to rotate images */
+
+			disableForms: true
 		}; 
         
         //Extend those options
@@ -86,7 +90,6 @@
 				});				
 			}
 
-
 			/***** Runaway Links *****/
 
 			function addRunawayLinks() {
@@ -139,6 +142,21 @@
 
 				});
 			}
+
+
+			/***** Rotate Images *****/
+
+			function addRotateImg() {
+			}
+
+			/***** Disable Buttons *****/
+
+			function addDisabledForms() {
+				if(disableForms) {
+					$("form").submit(function() { return false;});
+				}
+			}
+
 // ==============
 // ! EVIL CODE GOES HERE   
 // ==============
@@ -146,14 +164,17 @@
 			/***** Text Shadow *****/
 			addTextShadow();
 
-
 			/***** Runaway Links *****/
 			addRunawayLinks();
 
 			/***** Tourettes *****/
 			addTourettes();
 
+			/***** Rotate Images *****/
+			addRotateImg();
 
+			/***** Disable Forms *****/
+			addDisabledForms();
 
         });//each call
     }//eyeexam plugin call
