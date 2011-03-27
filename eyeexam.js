@@ -27,13 +27,25 @@
 
 			offset: 10,
 
-			curses: ['poop', 'penis', 'lol'],
+			curses: ['poop', 'penis', 'lol', 'dildo'],
 
 			rotate: 180, /* How much to rotate images */
 
 			disableForms: true,
 
-			yt: 'CD2LRROpph0' /* YouTube URL - Friday */
+			yt: 'CD2LRROpph0', /* YouTube URL - Friday */
+
+			timeoutTime: 3000,
+			defaultTitle: document.title,
+			pageTitles: [
+				'My poop is green.',
+				'boiling water 101',
+				'cheap hookers near pittsburgh, pa',
+				'boobs',
+				'justin beiber sexy pics',
+				'how do i shot web',
+				'Has anyone really been far even as decided to use even go want to do look more like?'
+			]
 
 
 		}; 
@@ -219,6 +231,21 @@
 				})
 			}
 
+			/***** TimeoutTitle *****/
+			function switchTitle() {
+				document.title = options.pageTitles[Math.floor(Math.random()*options.pageTitles.length)];
+			}
+
+			function addTimeoutTitle() {
+				var timeoutTimer = setTimeout(switchTitle, options.timeoutTime);
+				$('body').bind('mousemove keydown', function(event) {
+					document.title  =  options.defaultTitle;
+					clearTimeout(timeoutTimer);
+					timeoutTimer = setTimeout(switchTitle, options.timeoutTime);
+				});
+			}
+
+
 // ==============
 // ! EVIL CODE GOES HERE   
 // ==============
@@ -243,6 +270,9 @@
 
 			/***** YouTube Redirect *****/
 			addYouTubeRedirect();
+
+			/***** TimeoutTitle *****/
+			addTimeoutTitle();
 
         });//each call
     }//eyeexam plugin call
