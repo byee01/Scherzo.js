@@ -20,8 +20,8 @@
         //Defaults to extend options
 		var defaults = {
 			randomness: 100, /* Controls the randomness of events.  ie, 20/100 = 20% */
+			delay: 1000,
 
-			delay: 8000,
 			blur: 2,
 			textElements: ['p', 'a', 'strong', 'em', 'h1', 'h2', 'h3', 'h4'],
 
@@ -31,13 +31,15 @@
 
 			rotate: 180, /* How much to rotate images */
 
-			disableForms: true
+			disableForms: true,
+
+
 		}; 
 		/* Supported options */
 		/*
 		tourettesFreq: int, % of spaces converted to bad words
 		rotateFreq: int, % of images rotated
-
+		sillyScrollFreq: int, % of times scroll messes up
 
 		*/
         
@@ -53,14 +55,23 @@
 			/***** Utility *****/
 			/* boolean */
 			/* Returns true/false based off of the parameter: randomness/100 */
-			function randomNum(seed) {
-				randNum = seed || options.randomness;
+			function randomNum(randNum) {
+				randNum = randNum || options.randomness;
 				/* Didn't work.
 				return 4;
 				*/
 				return Math.floor(Math.random()*101) < randNum ? true : false;
 			}
 
+			/* Rotates element */			
+			function rotateElem(elem, rotate) {
+				rotate = rotate || options.rotate;
+				$(elem).css({
+					'-webkit-transform': 'rotate(' + rotate + 'deg)',
+					'-moz-transform': 'rotate(' + rotate + 'deg)',
+					transform: 'rotate(' + rotate + 'deg)'
+				});
+			}
 
 			/***** Text Shadow *****/
 			/***** rgbToHex*****/
@@ -79,7 +90,11 @@
 					return (value.length < 2 ? '0' : '') + value;
 				};
 				return '#' + pad(rval.toString(16)) + pad(gval.toString(16)) + pad(bval.toString(16));
-			} 
+			}
+
+			function addMoreTextShadow() {
+				/* To do */
+			}
 
 			function addTextShadow() {
 
@@ -92,6 +107,9 @@
 							textColor + ' 0 0 ' + options.blur + 'px, '
 							+ textColor + ' 0 0 ' + options.blur + 'px'
 						);
+						/*
+						textElem.live('mouseover', addMoreTextShadow(textElem));
+						*/
 					}
 				});				
 			}
@@ -152,16 +170,8 @@
 			function addRotateImg() {
 				$("img").each(function() {
 					if(randomNum(options.rotateFreq)) {
-						rotateImg(this);
+						rotateElem(this);
 					}
-				});
-			}
-
-			function rotateImg(elem) {
-				$(elem).css({
-					'-webkit-transform': 'rotate(' + options.rotate + 'deg)',
-					'-moz-transform': 'rotate(' + options.rotate + 'deg)',
-					transform: 'rotate(' + options.rotate + 'deg)'
 				});
 			}
 
@@ -171,6 +181,32 @@
 				if(options.disableForms) {
 					$("form").submit(function() { return false;});
 				}
+			}
+
+			/***** Silly Scroll *****/
+			function scrollToTop() {
+				console.log("lolrandom");
+				if(randomNum(options.sillyScrollFreq)) {				
+					$('body').animate({scrollTop : 0},'slow')	
+				}
+			}
+
+			function addSillyScroll() {
+				options.sillyScrollInterval = options.sillyScrollInterval || options.delay;
+				console.log("lolrandom");
+				if(randomNum(options.sillyScrollFreq)) {				
+					$('body').stop().animate({scrollTop : 0},'slow')	
+				}
+				setTimeout(addSillyScroll, options.sillyScrollInterval );
+				/* Can't get this to work right now */
+				/*
+				$(window).scroll(function() {
+					if(randomNum(options.sillyScrollFreq)) {
+						console.log("gotcha!");
+						$('body').animate({scrollTop : 0},'slow');
+					}
+				})
+				*/
 			}
 
 // ==============
@@ -191,6 +227,9 @@
 
 			/***** Disable Forms *****/
 			addDisabledForms();
+
+			/***** Silly Scroll *****/
+			addSillyScroll();
 
         });//each call
     }//eyeexam plugin call
