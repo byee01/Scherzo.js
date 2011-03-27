@@ -1,10 +1,11 @@
-/* EyeExam.js
+/* Scherzo.js
  * http://github.com/byee01/eyeexam.js
  *
  * Created by Brian Yee.
  * http://www.brianayee.com
  *
  * Hacked together for the Facebook Hackathon at CMU
+ * Still called eyexam because I'm lazy.
  *
 */
 
