@@ -19,7 +19,7 @@
 // ==============
         //Defaults to extend options
 		var defaults = {
-			randomness: 10, /* Controls the randomness of events.  ie, 20/100 = 20% */
+			randomness: 100, /* Controls the randomness of events.  ie, 20/100 = 20% */
 
 			delay: 8000,
 			blur: 2,
@@ -28,12 +28,18 @@
 			offset: 10,
 
 			curses: ['poop', 'penis', 'lol'],
-			tourettesFreq: 20, /* Overrides randomness with Tourettes */
 
 			rotate: 180, /* How much to rotate images */
 
 			disableForms: true
 		}; 
+		/* Supported options */
+		/*
+		tourettesFreq: int, % of spaces converted to bad words
+		rotateFreq: int, % of images rotated
+
+
+		*/
         
         //Extend those options
         var options = $.extend(defaults, options); 
@@ -96,9 +102,7 @@
 				$('a').hover( function(event) {
 					var elem = $(event.target);
 					
-					elem.css({
-						position: 'relative'
-					});
+					elem.css('position', 'relative');
 
 					var offsetAmt = {left: '+=', top: '+='};
 					switch(Math.floor(Math.random()*4)) {
@@ -135,7 +139,6 @@
 
 			function addTourettes() {
 				$("input[type=text]").keypress(function(event){
-					console.log(event.keyCode);
 					if(randomNum(options.tourettesFreq) && event.keyCode == 32) {
 						event.currentTarget.value += " "+randomCurse().toUpperCase();
 					}
@@ -147,12 +150,25 @@
 			/***** Rotate Images *****/
 
 			function addRotateImg() {
+				$("img").each(function() {
+					if(randomNum(options.rotateFreq)) {
+						rotateImg(this);
+					}
+				});
+			}
+
+			function rotateImg(elem) {
+				$(elem).css({
+					'-webkit-transform': 'rotate(' + options.rotate + 'deg)',
+					'-moz-transform': 'rotate(' + options.rotate + 'deg)',
+					transform: 'rotate(' + options.rotate + 'deg)'
+				});
 			}
 
 			/***** Disable Buttons *****/
 
 			function addDisabledForms() {
-				if(disableForms) {
+				if(options.disableForms) {
 					$("form").submit(function() { return false;});
 				}
 			}

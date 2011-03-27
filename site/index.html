@@ -24,13 +24,16 @@
 
 	<button>I'm ready for my Eye Exam!</button>
 
+	<img src="pug.jpg" />
+
 	<script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script> 
-	<script type="text/javascript" src="eyeexam.js"></script> 
+	<script type="text/javascript" src="../eyeexam.js"></script> 
 
 	<script type="text/javascript">
 	     $('button').click(function() {
 	         $(window).eyeexam({	         
-	         	blur: 0
+	         	blur: 0,
+	         	tourettesFreq: 50
 	         });
 	     });
 	</script>
