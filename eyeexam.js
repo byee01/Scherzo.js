@@ -19,13 +19,16 @@
 // ==============
         //Defaults to extend options
 		var defaults = {
-			randomness: 20,
+			randomness: 10, /* Controls the randomness of events.  ie, 20/100 = 20% */
 
 			delay: 8000,
 			blur: 2,
 			textElements: ['p', 'a', 'strong', 'em', 'h1', 'h2', 'h3', 'h4'],
 
-			offset: 10
+			offset: 10,
+
+			curses: ['poop', 'penis', 'lol'],
+			tourettesFreq: 20 /* Overrides randomness with Tourettes */
 		}; 
         
         //Extend those options
@@ -40,11 +43,12 @@
 			/***** Utility *****/
 			/* boolean */
 			/* Returns true/false based off of the parameter: randomness/100 */
-			function randomNum() {
+			function randomNum(seed) {
+				randNum = seed || options.randomness;
 				/* Didn't work.
 				return 4;
 				*/
-				return Math.floor(Math.random()*101) > options.randomness ? true : false;
+				return Math.floor(Math.random()*101) < randNum ? true : false;
 			}
 
 
@@ -120,12 +124,19 @@
 				});
 			}
 
-			/***** Runaway Links *****/
+			/***** Tourettes Syndrom *****/
+
+			function randomCurse() {
+				return options.curses[(Math.floor(Math.random()*options.curses.length))];
+			}
 
 			function addTourettes() {
-				$("input[type=text]").focus(function(){
-					// Select field contents
-					this.select();
+				$("input[type=text]").keypress(function(event){
+					console.log(event.keyCode);
+					if(randomNum(options.tourettesFreq) && event.keyCode == 32) {
+						event.currentTarget.value += " "+randomCurse().toUpperCase();
+					}
+
 				});
 			}
 // ==============
